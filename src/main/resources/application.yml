@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: comit-spring-jdbc
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydbuser
+    username: root
+    password: root

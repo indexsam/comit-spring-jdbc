@@ -1,9 +1,12 @@
 package org.comit.spring.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.comit.spring.bean.Customer;
+import org.comit.spring.bean.ServiceType;
 import org.comit.spring.service.CustomerService;
+import org.comit.spring.service.ServiceTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 //import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-//import org.comit.spring.service.UserService;
 
 @Controller
 public class CustomerController {
@@ -25,6 +28,26 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	
+	@Autowired
+	ServiceTypeService servicetypeService;
+	
+	@ModelAttribute("servicetypebridal")
+	List<ServiceType> listServiceTypeBridal() {
+		
+		return this.servicetypeService.listServiceTypeBridal();
+	}
+	
+	@ModelAttribute("servicetypewinter")
+	List<ServiceType> listServiceTypeWinter() {
+		
+		return this.servicetypeService.listServiceTypeWinter();
+	}
+	
+	@ModelAttribute("servicetypesummer")
+	List<ServiceType> listServiceTypeSummer() {
+		
+		return this.servicetypeService.listServiceTypeSummer();
+	}
 	
 	@GetMapping("/")
 	String index() {
@@ -53,7 +76,7 @@ public class CustomerController {
 		
 		this.customerService.createUser(customer);
 		
-		ra.addFlashAttribute("operation", "create");
+		ra.addFlashAttribute("operation", "create"); // (variable, value) returned
 		
 		return "redirect:/";  // home page
 	}
@@ -78,13 +101,27 @@ public class CustomerController {
 		return "pickup";
 	}
 	
+	
+	//  The list of services end points
 	@GetMapping("/bridalList")
-	String bridalList() {
+	String bridalList(ServiceType serviceType) {
 		
 		return "bridallist";
 	}
 	
+	@GetMapping("/winter")
+	String winterList(ServiceType serviceType) {
+		
+		return "winter";
+	}
 	
+	@GetMapping("/summer")
+	String sumerList(ServiceType serviceType) {
+		
+		return "summer";
+	}
+	
+	 // validating email
 		private void validateEmail(Customer customer, BindingResult binding) {
 		
 		
@@ -94,7 +131,7 @@ public class CustomerController {
 		}
 	}
 		
-		
+		// validating phone numbers
 		private void validatePhone(Customer customer, BindingResult binding) {
 			
 			

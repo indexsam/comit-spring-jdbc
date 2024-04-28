@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import java.time.LocalDateTime;
 @Repository
 public class CustomerDao {
 	
@@ -20,25 +21,35 @@ public class CustomerDao {
 				+ " PASSWORD, HOME_ADDRESS, POST_CODE, CREATED_DATE) " 
 	               + "VALUES(?,?,?,?,?,?,?)";
 		
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		
 		this.jdbcTemplate.update(sql, customer.getCustomerName(), customer.getEmail(), 
 				  customer.getPhoneNumber(), 
 				customer.getPassword(), customer.getHomeAddress(),
-				customer.getPostCode(), customer.getCreatedDate());
+				customer.getPostCode(), currentDateTime);
 	}
     
-       public void idU() {
+       
+    
+    
+    public String idU() {
 		 // Inside your method or class where you need the user's ID
 		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		    if (authentication != null) {
+
 		        String userId = authentication.getName();
 		        // Now you have the user's ID
 		        System.out.println("User ID: " + userId);
-		    } else {
-		        // Handle the case where authentication is null
-		    }}
+		        
+		        LocalDateTime currentDateTime = LocalDateTime.now();
+		        System.out.println("Local Date Time: " + currentDateTime);
+		        
+		         return userId;
+       }
 
-    
+           
+       
+       
     
     
     // for validating Email via binding in controller

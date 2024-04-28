@@ -1,7 +1,6 @@
 package org.comit.spring.service;
 
 import java.util.List;
-
 import org.comit.spring.bean.ServiceType;
 import org.comit.spring.dao.ServiceTypeDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +26,13 @@ public class ServiceTypeService {
 		
 		return this.servicetypeDao.listServiceTypeSummer();
 	}
+	
+	public void findItem(int iditem) {
+		
+		this.servicetypeDao.findItem(iditem);
+		
+	}
+	
+	
+	
 }

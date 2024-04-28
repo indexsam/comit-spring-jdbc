@@ -5,8 +5,10 @@ import java.util.Optional;
 
 import org.comit.spring.bean.Customer;
 import org.comit.spring.bean.ServiceType;
+import org.comit.spring.bean.ShopingCart;
 import org.comit.spring.service.CustomerService;
 import org.comit.spring.service.ServiceTypeService;
+import org.comit.spring.service.ShopingCartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,9 @@ import org.springframework.validation.FieldError;
 //import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -30,6 +34,10 @@ public class CustomerController {
 	
 	@Autowired
 	ServiceTypeService servicetypeService;
+	
+	@Autowired
+	ShopingCartService shopingcartService;
+	
 	
 	@ModelAttribute("servicetypebridal")
 	List<ServiceType> listServiceTypeBridal() {
@@ -57,6 +65,9 @@ public class CustomerController {
 		return "index";
 	}
 	
+	
+	// ACTION POINTS
+	
 	@PostMapping("/create")   // ACTION FOR '/register'
 	String createUser(Customer customer, RedirectAttributes ra, BindingResult binding) {
 		
@@ -82,6 +93,19 @@ public class CustomerController {
 		
 		return "redirect:/";  // home page
 	}
+	
+	
+	 // ACTION FOR '/cart'
+	@GetMapping("/addcart/{id}")
+	ModelAndView addCart(@PathVariable int id) {
+		
+		this.servicetypeService.findItem(id);
+		
+		List<ShopingCart> cart = this.shopingcartService.listShopingCart();
+		
+		return new ModelAndView("Cartfile","cart", cart);
+	}
+	
 	
 	
 	// VIEWS

@@ -2,7 +2,7 @@ package org.comit.spring.bean;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+//import org.springframework.format.annotation.DateTimeFormat;
 
 public class Customer {
 
@@ -15,8 +15,8 @@ public class Customer {
 		String postCode;
 		
 		
-		@DateTimeFormat(pattern = "yyyy-MM-dd")
-		Date createdDate;
+		//@DateTimeFormat(pattern = "yyyy-MM-dd")
+		//Date createdDate;
 
 
 		public int getIdCustomer() {
@@ -89,24 +89,14 @@ public class Customer {
 		}
 
 
-		public Date getCreatedDate() {
-			return createdDate;
-		}
-
-
-		public void setCreatedDate(Date createdDate) {
-			this.createdDate = createdDate;
-		}
-
-
 		@Override
 		public String toString() {
 			return "Customer [idCustomer=" + idCustomer + ", customerName=" + customerName + ", email=" + email
 					+ ", phoneNumber=" + phoneNumber + ", password=" + password + ", homeAddress=" + homeAddress
-					+ ", postCode=" + postCode + ", createdDate=" + createdDate + "]";
+					+ ", postCode=" + postCode + "]";
 		}
-		
-		
+
+
 		
 		
 }

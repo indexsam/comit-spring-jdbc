@@ -21,7 +21,7 @@ public class CustomerMapper implements RowMapper<Customer> {
 		customer.setPassword(rs.getString("PASSWORD"));
 		customer.setHomeAddress(rs.getString("HOME_ADDRESS"));
 		customer.setPostCode(rs.getString("POST_CODE"));
-		customer.setCreatedDate(rs.getDate("CREATED_DATE"));
+		//customer.setCreatedDate(rs.getDate("CREATED_DATE"));
 		
 		return customer;
 	}

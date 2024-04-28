@@ -86,11 +86,20 @@
 		</table>	
 	      <!-- @{/update/} + ${user.idUser} -->
 	   </div>
-      <div class="col-md-5">
-		    <img th:src="@{/img/bridal.jpg}" alt="Image" width="500" height="500" class="bd-placeholder-img rounded-circle"/>
+      <div class="col-md-5 mt-4">
+		    <img th:src="@{/img/cart.jpg}" alt="Image" width="200" height="200" class="bd-placeholder-img rounded-circle"/>
 		
-	        <h2 class="mt-5">Available services!</h2>
-	         <p>Be on the look out for our discounts and promotions! 😊</p>
+	        <div class = "row mt-5">
+	        	<div class= col>
+	        	<a href="#" class="btn btn-primary btn-m">Continue</a>
+	        	</div>
+	        	<div class= col>
+	        	<a href="#" class="btn btn-info btn-m"> Clear Cart</a>
+	        	</div>
+	        	<div class= col>
+	        	<a href="#" class="btn btn-warning btn-m">Check out</a>
+	        	</div>
+	        </div>
 	  </div> <!--  end col-md-5 -->
 	   
     </div>

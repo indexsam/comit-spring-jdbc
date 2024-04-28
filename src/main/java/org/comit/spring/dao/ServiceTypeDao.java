@@ -73,7 +73,7 @@ public class ServiceTypeDao {
 		       
 		      public Customer loggedUser(String str){
 		   		
-		   		String sql = "SELECT ID_CUSTOMER, CUSTOMER_NAME,EMAIL, PHONE_NUMBER, PASSWORD, HOME_ADDRESS,POST_CODE FROM CUSTOMER WHERE EMAIL = ?";
+		   		String sql = "SELECT ID_CUSTOMER, CUSTOMER_NAME,EMAIL, PHONE_NUMBER, PASSWORD, HOME_ADDRESS,POST_CODE FROM CUSTOMER WHERE UPPER(EMAIL) = UPPER(?)";
 		   		
 		   		return DataAccessUtils.singleResult(this.jdbcTemplate.query(sql, new CustomerMapper(), str));
 		   		

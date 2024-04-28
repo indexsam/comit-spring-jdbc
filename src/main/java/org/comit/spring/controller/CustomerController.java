@@ -106,6 +106,14 @@ public class CustomerController {
 		return new ModelAndView("Cartfile","cart", cart);
 	}
 	
+	@GetMapping("/deletecart")
+	String deleteCart() {
+		
+		this.servicetypeService.deleteItem();
+		
+				
+		return "redirect:/";
+	}
 	
 	
 	// VIEWS

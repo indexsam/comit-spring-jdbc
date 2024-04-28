@@ -33,6 +33,11 @@ public class ServiceTypeService {
 		
 	}
 	
+	public void deleteItem() {
+		
+		this.servicetypeDao.deleteItem();
+		
+	}
 	
 	
 }

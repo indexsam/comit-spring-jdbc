@@ -51,26 +51,57 @@ public class ServiceTypeDao {
 		public void findItem(int iditem){
 		   		
 		   		String sql = "SELECT * FROM SERVICE_TYPE WHERE ID_SERVICE_TYPE = ?";
+		   		
 		   		String sql2 = "INSERT INTO SHOPING_CART (TYPE, SERVICE_NAME, COST, DATE_TIME, CUSTOMER_ID_CUSTOMER, SERVICE_TYPE_ID_SERVICE_TYPE) " 
 			               + "VALUES(?,?,?,?,?,?)";
-		   		   		
+		   		
+		   		String sql3 = "INSERT INTO mydbuser.ORDER (TYPE, SERVICE_NAME, COST, STATUS, DATE_TIME, CUSTOMER_ID_CUSTOMER, SERVICE_TYPE_ID_SERVICE_TYPE) " 
+			               + "VALUES(?,?,?,?,?,?,?)";
+		   		
+		   		String sqlUpdate = "UPDATE SERVICE_TYPE SET STATUS = 'cart' WHERE ID_SERVICE_TYPE = ?";		
 		   		 
 		   		 
 		   	     Customer user = this.loggedUser(this.idU());
 		   	     
 		   	     System.out.println("User ID:  is NOT NULL IN DAO " + user.getIdCustomer());
 		   	     
+		   	     // select *  fills up all the serviceType bean variables for ServiceTypeMapper()
 		   	     ServiceType serve =  DataAccessUtils.singleResult(this.jdbcTemplate.query(sql, new ServiceTypeMapper(), iditem));
 		   	     
 		     	 LocalDateTime currentDateTime = LocalDateTime.now();
 		     	 
 		     	 
 		        this.jdbcTemplate.update(sql2, serve.getType(),serve.getServiceName(), serve.getCost(), currentDateTime,  user.getIdCustomer(), serve.getIdServiceType());
-		   	    
-		   	   		   	
+		        this.jdbcTemplate.update(sql3, serve.getType(),serve.getServiceName(), serve.getCost(), "new", currentDateTime,  user.getIdCustomer(), serve.getIdServiceType());
+		        this.jdbcTemplate.update(sqlUpdate, serve.getIdServiceType());
+		   	   	
+		        
 		   	 }
 		   
 		       
+		
+		public void deleteItem(){
+	   		
+	   		String sql = "DELETE FROM SHOPING_CART";
+	   		
+	   		String sql2 = "DELETE FROM mydbuser.ORDER WHERE STATUS='new' AND CUSTOMER_ID_CUSTOMER =?";
+	   		
+	   		String sqlUpdate = "UPDATE SERVICE_TYPE SET STATUS = 'available' ";		
+	   		 
+	   		 
+	   	     Customer user = this.loggedUser(this.idU());
+	   	     
+	   	     
+	     	this.jdbcTemplate.update(sql);
+	        this.jdbcTemplate.update(sql2, user.getIdCustomer());
+	        this.jdbcTemplate.update(sqlUpdate);
+	   	   	
+	        
+	   	 }
+	   
+		
+		
+		
 		      public Customer loggedUser(String str){
 		   		
 		   		String sql = "SELECT ID_CUSTOMER, CUSTOMER_NAME,EMAIL, PHONE_NUMBER, PASSWORD, HOME_ADDRESS,POST_CODE FROM CUSTOMER WHERE UPPER(EMAIL) = UPPER(?)";

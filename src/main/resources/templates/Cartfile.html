@@ -71,7 +71,7 @@
 		      <th scope="col">Id</th>
 		      <th scope="col">Service Name</th>
 		      <th scope="col" class="text-center">Price</th>
-		      <th scope="col" class="text-center">#</th>
+		<!--       <th scope="col" class="text-center">#</th>    -->
 		   </tr> 		    
 		  </thead>
 		  <tbody>
@@ -79,7 +79,7 @@
 		      <th th:text="${ct.IdShopingCart}" />
 		      <td th:text="${ct.ServiceName} "/>
 		      <td th:text="${ct.Cost}"/>
-		      <td class="text-right"><a href="#" class="btn btn-danger btn-sm">Remove from Cart</a></td>
+	<!--  	    <td class="text-right"><a href="#" class="btn btn-danger btn-sm">Remove from Cart</a></td>   -->
 		    
 		    </tr>
 		  </tbody>
@@ -90,13 +90,13 @@
 		    <img th:src="@{/img/cart.jpg}" alt="Image" width="200" height="200" class="bd-placeholder-img rounded-circle"/>
 		
 	        <div class = "row mt-5">
-	        	<div class= col>
-	        	<a href="#" class="btn btn-primary btn-m">Continue</a>
+	        	<div class= "col">
+	        	<button type="button"  class="btn btn-primary btn-m" onclick="history.back()" >Continue</button>
 	        	</div>
-	        	<div class= col>
-	        	<a href="#" class="btn btn-info btn-m"> Clear Cart</a>
+	        	<div class= "col">
+	        	<a th:href="@{/deletecart}" class="btn btn-info btn-m"> Clear Cart</a>
 	        	</div>
-	        	<div class= col>
+	        	<div class= "col">
 	        	<a href="#" class="btn btn-warning btn-m">Check out</a>
 	        	</div>
 	        </div>

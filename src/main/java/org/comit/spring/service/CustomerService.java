@@ -26,4 +26,8 @@ public class CustomerService {
 		return this.customerDao.findUserPhone(customer);
 	}
 		
+	    public void idU() {
+			this.customerDao.idU();
+		}
+		
 }

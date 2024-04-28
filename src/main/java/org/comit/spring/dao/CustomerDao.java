@@ -6,7 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 @Repository
 public class CustomerDao {
 	
@@ -25,7 +26,22 @@ public class CustomerDao {
 				customer.getPostCode(), customer.getCreatedDate());
 	}
     
-        // for validating Email via binding in controller
+       public void idU() {
+		 // Inside your method or class where you need the user's ID
+		    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		    if (authentication != null) {
+		        String userId = authentication.getName();
+		        // Now you have the user's ID
+		        System.out.println("User ID: " + userId);
+		    } else {
+		        // Handle the case where authentication is null
+		    }}
+
+    
+    
+    
+    // for validating Email via binding in controller
 		public Customer findUserEmail(Customer customer){
 				
 				String sql = "SELECT * FROM CUSTOMER WHERE ID_CUSTOMER != ? AND UPPER(EMAIL) = UPPER(?)";

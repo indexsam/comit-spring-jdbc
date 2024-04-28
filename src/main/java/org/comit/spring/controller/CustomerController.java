@@ -52,6 +52,8 @@ public class CustomerController {
 	@GetMapping("/")
 	String index() {
 		
+		this.customerService.idU();
+		
 		return "index";
 	}
 	

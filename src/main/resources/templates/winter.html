@@ -63,7 +63,7 @@
     <div class="row featurette">
       <div class="col-md-7">
         
-       <h1> <p> List of Services and their prices</p> </h1>
+       <h1> <p> List for <strong>Jacket & Winter wears</strong> Services and their Prices!</p> </h1>
        
        <table class="table table-striped table-hover">
 		  <thead>
@@ -81,7 +81,7 @@
 		      <td th:text="${service.serviceName} "/>
 		      <td th:text="${service.Cost}"/>
 		      <td th:text="${service.Status}"/>
-		      <td class="text-right"><a href="#" class="btn btn-warning btn-sm">Add to Cart</a></td>
+		      <td class="text-right"><a th:href="@{/addcart/} + ${service.idServiceType}" class="btn btn-warning btn-sm">Add to Cart</a></td>
 		    
 		    </tr>
 		  </tbody>
@@ -93,6 +93,7 @@
 		
 	        <h2 class="mt-5">Available services!</h2>
 	         <p>Be on the look out for our discounts and promotions! 😊</p>
+	         <p><a class="btn btn-secondary btn-info" th:href="@{/shoppingcart}">View Cart &raquo;</a></p>
 	  </div> <!--  end col-md-5 -->
 	   
     </div>

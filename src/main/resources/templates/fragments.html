@@ -93,7 +93,7 @@
 
        /*]]>*/   
     
-       if (operation !== null ){
+       if (operation === 'create' ){
     	   
     	   iziToast.show({
     		    title: 'Success',
@@ -103,9 +103,19 @@
     		    color: 'green'
     		});
     	   
-       }  else {
-    	          // Do nothing 
-    	       }
+       }  else if (operation === 'delete' ) {
+    	          
+    	          iziToast.show({
+    		    title: 'Success',
+    		    message: 'Your cart has been ' + operation + 'd successfully!',
+    		    position: 'topRight',
+    		    timeout: 20000,  // 20 Secs
+    		    color: 'orange'
+    	          });
+    	       } else {
+    	    	         // Do nothing
+    	       		  }
+    	       
     
       function deleteUser(idUser){
     	  iziToast.question({

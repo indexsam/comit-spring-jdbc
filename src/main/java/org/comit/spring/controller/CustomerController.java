@@ -57,6 +57,12 @@ public class CustomerController {
 		return this.servicetypeService.listServiceTypeSummer();
 	}
 	
+	@ModelAttribute("shopingcartservice")
+	public List<ShopingCart> listShopingCart() {
+		
+		return this.shopingcartService.listShopingCart();
+	}
+	
 	@GetMapping("/")
 	String index() {
 		
@@ -107,11 +113,12 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/deletecart")
-	String deleteCart() {
+	String deleteCart(RedirectAttributes ra) {
 		
 		this.servicetypeService.deleteItem();
 		
-				
+		ra.addFlashAttribute("operation", "delete");	
+		
 		return "redirect:/";
 	}
 	
@@ -153,6 +160,12 @@ public class CustomerController {
 	String sumerList(ServiceType serviceType) {
 		
 		return "summer";
+	}
+	
+	@GetMapping("/shoppingcart")
+	String shoppingCart(ServiceType serviceType) {
+		
+		return "ViewCartfile";
 	}
 	
 	 // validating email

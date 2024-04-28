@@ -17,6 +17,8 @@ public class ShopingCartDao {
 	
 	public List<ShopingCart> listShopingCart(){
 		
+		
+		// pick only the  columns the map to the bean variables  ( sometime they all map , then use select *)
 		String sql = "SELECT ID_SHOPING_CART, TYPE, SERVICE_NAME, COST FROM SHOPING_CART";
 		
 		return this.jdbcTemplate.query(sql, new ShopingCartMapper());

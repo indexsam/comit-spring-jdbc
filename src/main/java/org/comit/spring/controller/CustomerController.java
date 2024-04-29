@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.comit.spring.bean.Customer;
 import org.comit.spring.bean.ServiceType;
 import org.comit.spring.bean.ShopingCart;
+import org.comit.spring.bean.Transaction;
 import org.comit.spring.service.CustomerService;
 import org.comit.spring.service.ServiceTypeService;
 import org.comit.spring.service.ShopingCartService;
+import org.comit.spring.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,9 @@ public class CustomerController {
 	
 	@Autowired
 	ShopingCartService shopingcartService;
+	
+	@Autowired
+	TransactionService transactionService;
 	
 	
 	@ModelAttribute("servicetypebridal")
@@ -137,11 +142,13 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/pickup")
-	String pickupSchedule() {
+	ModelAndView  pickupSchedule(Transaction transaction) {
 		
 		this.servicetypeService.CheckoutItem();
 		
-		return "pickup";
+		transaction = transactionService.transCustomer();
+		
+		return new ModelAndView("pickup","transaction", transaction);
 	}
 	
 	

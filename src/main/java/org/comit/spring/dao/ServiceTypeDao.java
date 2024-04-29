@@ -101,6 +101,8 @@ public class ServiceTypeDao {
 	   
 		
 		public void CheckoutItem(){
+			
+			double total = (double)this.sumColumn();
 	   		
 	   		String sql = "DELETE FROM SHOPING_CART";
 	   		
@@ -108,19 +110,26 @@ public class ServiceTypeDao {
 	   		
 	   		String sqlUpdate = "UPDATE SERVICE_TYPE SET STATUS = 'available' ";		
 	   		 
+	   		String sqltrans = "INSERT INTO TRANSACTION (TOTAL, DATE_TIME, CUSTOMER_ID_CUSTOMER)"
+	   				             + "VALUES(?,?,?)";
 	   		 
 	   	     Customer user = this.loggedUser(this.idU());
-	   	     
+	   	     LocalDateTime currentDateTime = LocalDateTime.now();
 	   	     
 	     	this.jdbcTemplate.update(sql);
 	        this.jdbcTemplate.update(sql2, user.getIdCustomer());
 	        this.jdbcTemplate.update(sqlUpdate);
+	        this.jdbcTemplate.update(sqltrans, total, currentDateTime, user.getIdCustomer());
 	   	   	
 	        
 	   	 }
 		
 		
-		
+		//  calculate the Sum of the cart COST column
+		 public int sumColumn() {
+	        String sql = "SELECT SUM(COST) FROM SHOPING_CART";
+	        return jdbcTemplate.queryForObject(sql, Integer.class);
+	    }
 		
 		
 		     public Customer loggedUser(String str){

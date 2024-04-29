@@ -40,4 +40,10 @@ public class ServiceTypeService {
 	}
 	
 	
+	public void CheckoutItem() {
+		
+		this.servicetypeDao.CheckoutItem();
+		
+	}
+	
 }

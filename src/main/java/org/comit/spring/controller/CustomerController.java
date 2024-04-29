@@ -93,7 +93,7 @@ public class CustomerController {
 			return "register";
 		}
 		
-		this.customerService.createUser(customer);
+		this.customerService.createUser(customer); // the customer object is used (see CustomerDao)
 		
 		ra.addFlashAttribute("operation", "create"); // (variable, value) returned
 		
@@ -138,6 +138,8 @@ public class CustomerController {
 	
 	@GetMapping("/pickup")
 	String pickupSchedule() {
+		
+		this.servicetypeService.CheckoutItem();
 		
 		return "pickup";
 	}

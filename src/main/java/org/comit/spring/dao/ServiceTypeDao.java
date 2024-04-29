@@ -100,9 +100,30 @@ public class ServiceTypeDao {
 	   	 }
 	   
 		
+		public void CheckoutItem(){
+	   		
+	   		String sql = "DELETE FROM SHOPING_CART";
+	   		
+	   		String sql2 = "UPDATE mydbuser.ORDER SET STATUS='old' WHERE CUSTOMER_ID_CUSTOMER =?";
+	   		
+	   		String sqlUpdate = "UPDATE SERVICE_TYPE SET STATUS = 'available' ";		
+	   		 
+	   		 
+	   	     Customer user = this.loggedUser(this.idU());
+	   	     
+	   	     
+	     	this.jdbcTemplate.update(sql);
+	        this.jdbcTemplate.update(sql2, user.getIdCustomer());
+	        this.jdbcTemplate.update(sqlUpdate);
+	   	   	
+	        
+	   	 }
 		
 		
-		      public Customer loggedUser(String str){
+		
+		
+		
+		     public Customer loggedUser(String str){
 		   		
 		   		String sql = "SELECT ID_CUSTOMER, CUSTOMER_NAME,EMAIL, PHONE_NUMBER, PASSWORD, HOME_ADDRESS,POST_CODE FROM CUSTOMER WHERE UPPER(EMAIL) = UPPER(?)";
 		   		

@@ -5,6 +5,7 @@ import org.comit.spring.dao.CustomerDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService {
@@ -14,14 +15,15 @@ public class CustomerService {
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
-
+	
+	@Transactional
 	public void createUser(Customer customer){
 		
 		// only those registered with encrypted password can log in (encrypted from config.WebSecurityConfig.java
 		 customer.setPassword(this.passwordEncoder.encode(customer.getPassword())); // enable encryption of password 
 			
 		   this.customerDao.createUser(customer);
-		}
+	}
 
 	public Customer findUserEmail(Customer customer){
 		

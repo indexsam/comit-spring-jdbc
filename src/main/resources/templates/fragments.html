@@ -112,7 +112,16 @@
     		    timeout: 20000,  // 20 Secs
     		    color: 'orange'
     	          });
-    	       } else {
+    	       } else if (operation === 'schedule' ) {
+     	          
+     	          iziToast.show({
+     		    title: 'Success',
+     		    message: ' Your Pick up has been ' + operation + 'd successfully!',
+     		    position: 'topRight',
+     		    timeout: 20000,  // 20 Secs
+     		    color: 'blue'
+     	          });
+     	       }  else {
     	    	         // Do nothing
     	       		  }
     	       

@@ -16,9 +16,6 @@ public class TransactionMapper implements RowMapper<Transaction> {
 		trans.setIdTransaction(rs.getInt("ID_TRANSACTION"));
 		trans.setTotal(rs.getDouble("TOTAL"));
 		
-	
-		
-		
 		
 		return trans;
 	}

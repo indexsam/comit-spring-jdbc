@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.comit.spring.bean.Customer;
+import org.comit.spring.bean.PickUp;
 import org.comit.spring.bean.ServiceType;
 import org.comit.spring.bean.ShopingCart;
 import org.comit.spring.bean.Transaction;
 import org.comit.spring.service.CustomerService;
+import org.comit.spring.service.PickUpService;
 import org.comit.spring.service.ServiceTypeService;
 import org.comit.spring.service.ShopingCartService;
 import org.comit.spring.service.TransactionService;
@@ -43,6 +45,9 @@ public class CustomerController {
 	@Autowired
 	TransactionService transactionService;
 	
+	@Autowired
+	PickUpService pickupService;
+	
 	
 	@ModelAttribute("servicetypebridal")
 	List<ServiceType> listServiceTypeBridal() {
@@ -67,6 +72,10 @@ public class CustomerController {
 		
 		return this.shopingcartService.listShopingCart();
 	}
+	
+	
+
+	
 	
 	@GetMapping("/")
 	String index() {
@@ -106,6 +115,23 @@ public class CustomerController {
 	}
 	
 	
+	@PostMapping("/schedule")   // ACTION FOR '/pickup'
+	String createPickup(PickUp pickup, RedirectAttributes ra) {
+		
+		this.logger.debug("Creating pick up schedule, {}", pickup.toString());
+		
+				
+		this.pickupService.createPickup(pickup); // 
+		
+		ra.addFlashAttribute("operation", "schedule"); // (variable, value) returned
+		
+		return "redirect:/";  // home page
+	}
+	
+	
+	
+	
+	
 	 // ACTION FOR '/cart'
 	@GetMapping("/addcart/{id}")
 	ModelAndView addCart(@PathVariable int id) {
@@ -116,6 +142,9 @@ public class CustomerController {
 		
 		return new ModelAndView("Cartfile","cart", cart);
 	}
+	
+	
+	
 	
 	@GetMapping("/deletecart")
 	String deleteCart(RedirectAttributes ra) {
@@ -135,20 +164,27 @@ public class CustomerController {
 		return "register";
 	}
 	
+	
+	@GetMapping("/pickup")
+	ModelAndView pickupCall(PickUp pickup) {
+		
+		return new ModelAndView( "pickup", "pickup", pickup);
+	}
+	
 	@GetMapping("/contact")
 	String contactUs() {
 		
 		return "contact";
 	}
 	
-	@GetMapping("/pickup")
+	@GetMapping("/pickupvoucher")
 	ModelAndView  pickupSchedule(Transaction transaction) {
 		
 		this.servicetypeService.CheckoutItem();
 		
 		transaction = transactionService.transCustomer();
 		
-		return new ModelAndView("pickup","transaction", transaction);
+		return new ModelAndView("pickupvoucher","transaction", transaction);
 	}
 	
 	

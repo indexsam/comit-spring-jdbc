@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+	<div class="form-check form-group col-sm-4 col-form-label text-right ml-5">
+				    <input class="form-check-input  " type="radio" name="flexRadioDefault" id="flexRadioDefault1" th:value="AM" th:field="*{amPm}" >
+	    <label class="form-check-label " for="flexRadioDefault1">
+	        AM
+	    </label>
+	</div>
+	<div class="form-check form-group col-sm-4 col-form-label text-right  ml-5  mt-0">
+	    <input class="form-check-input " type="radio" name="flexRadioDefault" id="flexRadioDefault2" th:value="PM" th:field="*{amPm}" checked>
+	    <label class="form-check-label " for="flexRadioDefault2">
+	        PM
+	    </label>
+	</div>
+
+</body>
+</html>

@@ -161,14 +161,14 @@ public class CustomerController {
 	@GetMapping("/register")
 	String registerCustomer(Customer customer) {
 		
-		return "register";
+		return "register";  // customer model sent in automatically, for a controller object. ONLY for 1 controller object!!!
 	}
 	
 	
 	@GetMapping("/pickup")
 	ModelAndView pickupCall(PickUp pickup) {
 		
-		return new ModelAndView( "pickup", "pickup", pickup);
+		return new ModelAndView( "pickup", "pickup", pickup); // sending in the pickup model 
 	}
 	
 	@GetMapping("/contact")
